@@ -10,17 +10,17 @@ import java.net.*;
 public class Server {
 
     public static void main(String[] args) {
-        try {//服务端在10001端口监听客户端请求的TCP连接
+        try {//the server listens to the TCP connection which is requested by the client on port 10001
             ServerSocket server = new ServerSocket(10001);
             {
                 Socket client = null;
                 boolean f = true;
                 while (f) {
-                    //等待客户端的连接，如果没有获取连接
+                    //waiting for client's connection
                     client = server.accept();
                     String ip = client.getInetAddress().getHostAddress();
                     System.out.println(ip + "......connected");
-                    //为每个客户端连接开启一个线程
+                    //create a new thread for each client
                     new Thread(new ServerThread(client)).start();
                 }
             }
